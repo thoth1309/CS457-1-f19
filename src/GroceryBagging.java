@@ -139,9 +139,9 @@ public class GroceryBagging {
 
                 // make sure we succeeded. If so, we can just end. If not, tell the user
                 if (!success)
-                    System.out.println("failure");
+                    System.out.print("failure");
             } else
-                System.out.println("failure");
+                System.out.print("failure");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

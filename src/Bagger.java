@@ -59,7 +59,7 @@ public class Bagger {
         success = tmpSolution.getSuccess();
         if (success) {
             if (print) {
-                System.out.println(tmpSolution.toString());
+                System.out.print(tmpSolution.toString());
                 print = false;
             }
             return success;
@@ -113,7 +113,7 @@ public class Bagger {
                 int depth = curSolution.getDepth();
                 while(curSolution.getDepth() == depth && !stateStorage.isEmpty()) {
                     if (curSolution.getSuccess())
-                        System.out.println(curSolution.toString());
+                        System.out.print(curSolution.toString());
                     curSolution = stateStorage.getNext();
                 }
                 break;
