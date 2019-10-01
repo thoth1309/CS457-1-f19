@@ -1,34 +1,25 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
-/**
- *
- */
 public class Bagger {
     private StateStorage stateStorage;
     private boolean success;
     private boolean print;
-//    private Solution solution;
-
-    // TODO: take in your data, and create a Solution with the data
 
     /**
+     * Primary constructor for Bagger. Creates a new bagger object and returns it
+     * to the user
      *
      * @param storage
-     * @param
-     * @param
      */
-    public Bagger(StateStorage storage) {//, ArrayList<Grocery> groceries, ArrayList<Bag> bags){
+    public Bagger(StateStorage storage) {
         this.stateStorage = storage;
         this.success = false;
         print = true;
-//        solution = new Solution(groceries, bags);
     }
 
     /**
      * Public facing bagGroceries method... sends the solution to the correct method
+     *
      * @param solution
      * @return
      */
@@ -65,8 +56,6 @@ public class Bagger {
             return success;
         }
 
-        // TODO: need to make sure these are COPIES, and not the original
-        // TODO: REQUIRES FURTHER TESTING
         // Get the bags and groceries from the state
         ArrayList<Bag> tmpBags = solution.getBags();
         ArrayList<Grocery> tmpGroceries = solution.getGroceries();
@@ -76,8 +65,6 @@ public class Bagger {
         // As long as success is false, we'll keep searching new bags.
         for ( Bag bag: tmpBags ) {
             if (bag.addToBag(tmpGrocery)) {
-                // TODO: need to make sure this is a copy!!!
-                // TODO: REQUIRES FURTHER TESTING. MAY NOT BE NECESSARY
                 newSolution = new Solution();    // make new solution identical to old solution
                 newSolution.setGroceries(tmpGroceries);     // change items
                 newSolution.setBags(tmpBags);               // change bags
@@ -96,6 +83,15 @@ public class Bagger {
         return success;
     }
 
+    /**
+     * Breadth First search implementation for grocery bagger. Ini a future version
+     * this may be re-implemented as a function within BFS.java. It takes in a
+     * possible solution, and tries to find all successful ways to bag the provided
+     * grocery items in the provided solution.
+     *
+     * @param solution
+     * @return
+     */
     private boolean bagGroceriesBFS(Solution solution) {
         // put the seed solution into stateStorage, and declare some variables to be used later
         stateStorage.put(solution);

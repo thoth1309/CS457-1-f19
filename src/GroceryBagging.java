@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -52,7 +51,6 @@ public class GroceryBagging {
                 System.out.print("Default storage: DFS\n");
             }
 
-            // TODO: parse the file for relevant bag count and sizes, send to bagger
             scanner = new Scanner(inFile);
 
             // get bag quantity and size, then create our set of bags
@@ -133,7 +131,6 @@ public class GroceryBagging {
             // even wasting our time trying to bag the items.
             if(maxBagSize > totalItemSize) {
                 Solution seed = new Solution(groceries, bags);
-//                stateStorage.put(seed);
                 Bagger bagger = new Bagger(stateStorage);//, groceries, bags);
                 success = bagger.bagGroceries(seed);//stateStorage.getNext());
 
@@ -158,11 +155,10 @@ public class GroceryBagging {
         StringBuilder usageMessage;
         usageMessage = new StringBuilder();
 
-        usageMessage.append("usage: $ java GroceryBagging filename [-depth | -breadth]\n");
+        usageMessage.append("usage: $ bagit filename [-depth | -breadth]\n");
         usageMessage.append("\t-depth | -d: algorithm will utilize depth first search\n");
         usageMessage.append("\t-breadth | -b: algorithm will utilize breadth first search\n");
         usageMessage.append("\t\t(default is depth first search)\n");
-        //  TODO: put in a valid usage message!!!
 
         System.out.println(usageMessage.toString());
         System.exit(0);

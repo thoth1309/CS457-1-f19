@@ -1,10 +1,5 @@
-import java.math.BigInteger;
-import java.util.BitSet;
 import java.util.HashMap;
 
-/**
- *
- */
 public class Grocery {
     private String name;
     private int size;
@@ -13,9 +8,10 @@ public class Grocery {
     private boolean canPack;    // false means any appearing items CANNOT be packed with this item
 
     /**
+     * Primary constructor for grocery items.
      *
-     * @param name
-     * @param size
+     * @param name - the unique name of the item
+     * @param size - the size of the item
      */
     public Grocery(String name, int size) {
         this.name = name;
@@ -26,8 +22,11 @@ public class Grocery {
     }
 
     /**
+     * Alternate constructor for adding items from constraints.
+     * Requires only the items name, and sets the items weight to -1,
+     * expecting an actual value to be added later
      *
-     * @param name
+     * @param name - the unique name of the item
      */
     public Grocery(String name) {
         this(name, -1);
@@ -43,14 +42,9 @@ public class Grocery {
     }
 
     /**
-     *
-     * @return
-     */
-    public boolean getCanPack() {
-        return canPack;
-    }
-
-    /**
+     * Adds a paired item to the pairings set. If canPack is set, these are the
+     * ONLY items the grocery can be paired with. If canPack is not set, these
+     * are the only items that this grocery cannot be paired with.
      *
      * @param pairings
      */
@@ -59,27 +53,17 @@ public class Grocery {
     }
 
     /**
+     * Sets the size of the item, if it wasn't set in the constructor
      *
      * @param size
      */
     public void setItemSize(int size) {
-        this.size = size;
-    }
-
-    // TODO: I think this is deprecated
-    public void toggleBagged() {
-        bagged = !bagged;
+        if(this.size == -1)
+            this.size = size;
     }
 
     /**
-     *
-     * @return
-     */
-    public String getName(){
-        return name;
-    }
-
-    /**
+     * retrieves the size of the item
      *
      * @return
      */
@@ -88,6 +72,17 @@ public class Grocery {
     }
 
     /**
+     * returns the name of the item as a string
+     *
+     * @return
+     */
+    public String getName(){
+        return name;
+    }
+
+    /**
+     * Returns an boolean value indicating whether or not the potential
+     * item can be packed with this item
      *
      * @param potential
      * @return
@@ -99,17 +94,8 @@ public class Grocery {
             return !pairings.containsKey(potential);
     }
 
-    // TODO: delete this deprecated method
-    public HashMap<String, Grocery> getPairings() {
-        return this.pairings;
-    }
-
-    // TODO: I think this is deprecated
-    public boolean isBagged() {
-        return bagged;
-    }
-
     /**
+     * Returns the name of the item. This may change in the future.
      *
      * @return
      */

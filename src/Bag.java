@@ -1,18 +1,12 @@
 import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.HashSet;
-import java.util.Set;
 
-/**
- *
- */
 public class Bag {
     private int maxSize;
     private int curSize;
     private ArrayList<Grocery> inBag;
-//    private BitSet parameters;
 
     /**
+     * Constructor for creating bags
      *
      * @param maxSize
      */
@@ -20,34 +14,25 @@ public class Bag {
         this.maxSize = maxSize;
         this.curSize = 0;
         this.inBag = new ArrayList<>();
-//        this.parameters = new BitSet();
     }
 
     /**
+     * Checks to make sure the item can be added, and if it can, the item is added.
+     * Returns success or failure
      *
      * @param grocery
      */
     public boolean addToBag(Grocery grocery) {
-        if(canAdd(grocery) && (curSize + grocery.getSize() <= maxSize)){
+        if(canAdd(grocery) && ((curSize + grocery.getSize()) <= maxSize)){
             inBag.add(grocery);
             curSize += grocery.getSize();
             return true;
         } else
             return false;
-           // grocery.toggleBagged();
-        // TODO: add the bitset!
-    }
-
-    // TODO: I think this will be deprecated
-    /**
-     *
-     * @param grocery
-     */
-    public void takeFromBag(Grocery grocery) {
-        if (inBag.remove(grocery)){}
     }
 
     /**
+     * returns the maximum size the bag can store
      *
      * @return
      */
@@ -55,16 +40,9 @@ public class Bag {
         return maxSize;
     }
 
-    /**
-     *
-     * @return
-     */
-    public int getCurSize() {
-        return curSize;
-    }
-
-    /**
-     *
+   /**
+     * Returns an arraylist containing the items in the bag
+    *
      * @return
      */
     public ArrayList<Grocery> getInBag() {
@@ -72,6 +50,10 @@ public class Bag {
     }
 
     /**
+     * private function to determine whether or not an item can
+     * be added to a bag. Checks all items in the bag to make sure
+     * they don't have restrictions against it, and then checks for
+     * a restriction of the current item against the item in the bag
      *
      * @param grocery
      * @return
@@ -90,6 +72,7 @@ public class Bag {
     }
 
     /**
+     * Returns a string containing all of the items in the bag
      *
      * @return
      */
@@ -97,8 +80,7 @@ public class Bag {
         StringBuilder contents;
         contents = new StringBuilder();
 
-        // TODO: build the string containing the contents of the bag
-        for (Grocery item : inBag) {
+           for (Grocery item : inBag) {
             contents.append(item.getName() + " ");
         }
 
