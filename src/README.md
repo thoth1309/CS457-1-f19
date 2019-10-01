@@ -93,9 +93,50 @@ For a breadth first search, all possible solutions at the depth of the first
 solution will be printed to the screen. For a depth first search, only the first
 solution discovered will be printed.
 
-## Testing
+## Design and Testing
 
-This file was tested both with and without the Makefile for compilation, and
+This project went through several phases of design, and there were several
+significant changes during implementation. In my initial design I was going to 
+use hash sets to hold items, and treat my items as variables. As I began to
+implement this design I ran into my first problem: how to keep track of which
+items were in which bags, and whether or not they needed to be removed or left
+in, and further, what to do in the event that I needed to backtrack. 
+
+In trying to figure out a suitable solution to the problems that I was facing
+with my variable as the groceries, I decided that it should be straightforward
+to implement a binary index algorithm to track which items could and could not
+be paired together. This presented its own problem set as I found it difficult
+to figure out how to create a string of bits of arbitrary length that wouldn't
+eventually be overrun given a list of items of sufficient length. The solution
+that I first arrived at for this particular problem was to utilize Java's
+BigInteger class, which consists of integers of variable sizes, and can be fully
+controlled via bit manipulation operations. I eventually found that this was
+particularly difficult to control, because one cannot simply print out the value
+of the BigInteger in regular binary in an arbitrary number of bits, but must
+first convert to a regular integer or a long, which defeats the whole purpose of
+trying to print the BigInteger to see how many bits it has and what they look
+like. 
+
+After spending far too long on this particular problem, I gave up on it and
+utilized ArrayLists to accomplish the task of storing my items, and hashsets to
+store the list of possible pairings. I developed a boolean switch in the Grocery
+class which, when set, meant that the items in the list were the only possible
+pairings for the given item, and when not set meant that any items but the items
+in the list were possible pairings, and set about making the rest of my logic. 
+
+After attending class, I realised that they idea of creating a super-object to
+hold my current list of unbagged items and bags with or without items wasn't
+really such a bad idea after all, and decided to change up my implementation to
+this method so that I could pass around these solution states instead of trying
+to figure out my items. This seemed to make the primary logic of a BFS and DFS
+much simpler, but on testing I discovered that the solution objects were all
+using the same set of bags. Eventually I was able to resolve this issue by
+creating a method within the solution class that creates a true copy of the
+solution object passed in to it and was able to perform my unique manipulations
+on these new bags and items. After figuring out how to accomplish this portion
+of the project, it was all down to testing and cleaning up the code.
+
+This project was tested both with and without the Makefile for compilation, and
 with and without the BASH script for functionality. Use of generated test files
 and the provided solution checker programs were also used to generate input, and
 confirm output.
